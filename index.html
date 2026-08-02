@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="WOLFLAND - Bosque dos Lobinhos: aventuras mágicas com Ricky, JP, Lila e Rosie para crianças!">
+<title>Bosque dos Lobinhos — WOLFLAND</title>
+<link rel="icon" type="image/x-icon" href="img/favicon.ico">
+<link rel="icon" type="image/png" sizes="192x192" href="img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ricky:    #C4935A;
+  --jp:       #3B6FA0;
+  --lila:     #A8C8E8;
+  --rosie:    #D878B0;
+  --gold:     #F5E042;
+  --green:    #1A3320;
+  --night:    #12082A;
+  --forest:   #0D1F0D;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior:smooth; }
+
+body {
+  font-family:'Nunito',sans-serif;
+  background:var(--forest);
+  color:#fff;
+  overflow-x:hidden;
+}
+
+/* ─── NAV ─────────────────────────────────────────────── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1rem 2rem;
+  background:rgba(13,31,13,0.8);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(245,224,66,0.1);
+}
+.nav-logo { font-size:1.2rem; font-weight:900; color:var(--gold); letter-spacing:3px; text-decoration:none; }
+.nav-links { display:flex; gap:1.5rem; list-style:none; }
+.nav-links a { color:rgba(255,255,255,0.7); text-decoration:none; font-weight:700; font-size:0.9rem; transition:color .2s; }
+.nav-links a:hover { color:var(--gold); }
+.nav-cta {
+  background:var(--gold); color:#12082A;
+  padding:.5rem 1.2rem; border-radius:50px;
+  font-weight:800; font-size:.85rem; text-decoration:none;
+  transition:transform .2s, box-shadow .2s;
+}
+.nav-cta:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(245,224,66,0.4); }
+
+@media(max-width:700px){
+  .nav-links { display:none; }
+}
+
+/* ─── HERO ────────────────────────────────────────────── */
+.hero {
+  min-height:100vh;
+  background:linear-gradient(180deg, #0D1F0D 0%, #1A3320 35%, #12082A 75%, #0D1F0D 100%);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center;
+  padding:6rem 1.5rem 11rem;
+  position:relative; overflow:hidden;
+}
+.hero > *:not(#stars):not(.trees-svg):not(.scroll-cue) {
+  position:relative; z-index:5;
+}
+
+/* Stars */
+#stars { position:absolute; inset:0; pointer-events:none; }
+.s {
+  position:absolute; background:#fff; border-radius:50%;
+  animation:twinkle var(--d,3s) var(--delay,0s) infinite alternate;
+}
+@keyframes twinkle {
+  from { opacity:.15; transform:scale(1); }
+  to   { opacity:1;   transform:scale(1.4); }
+}
+
+/* Fireflies */
+.ff {
+  position:absolute; width:4px; height:4px;
+  background:var(--gold); border-radius:50%;
+  filter:blur(1px);
+  animation:fly var(--d,8s) var(--delay,0s) infinite ease-in-out;
+}
+@keyframes fly {
+  0%   { transform:translate(0,0) scale(0); opacity:0; }
+  20%  { opacity:1; transform:translate(var(--tx1),var(--ty1)) scale(1); }
+  50%  { opacity:.6; transform:translate(var(--tx2),var(--ty2)) scale(0.8); }
+  80%  { opacity:1; transform:translate(var(--tx3),var(--ty3)) scale(1.2); }
+  100% { transform:translate(var(--tx4),var(--ty4)) scale(0); opacity:0; }
+}
+
+/* Tree silhouettes */
+.trees-svg {
+  position:absolute; bottom:0; left:0; right:0;
+  pointer-events:none; height:160px;
+}
+
+.hero-badge {
+  display:inline-block;
+  background:rgba(245,224,66,.1);
+  border:1px solid rgba(245,224,66,.3);
+  color:var(--gold);
+  font-size:.8rem; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase;
+  padding:.4rem 1.2rem; border-radius:50px;
+  margin-bottom:1.5rem;
+}
+
+.hero-title {
+  font-size:clamp(3.5rem,10vw,7rem);
+  font-weight:900; color:var(--gold);
+  text-shadow:0 0 40px rgba(245,224,66,.4), 4px 4px 0 rgba(0,0,0,.3);
+  letter-spacing:6px; line-height:1;
+  margin-bottom:.4rem;
+}
+.hero-sub {
+  font-size:clamp(1rem,2.5vw,1.4rem);
+  color:#8ae88a; font-weight:700; letter-spacing:3px;
+  margin-bottom:1.5rem;
+}
+.hero-desc {
+  max-width:560px; line-height:1.7;
+  color:rgba(255,255,255,.8); font-size:1.05rem;
+  margin-bottom:2.5rem;
+}
+
+/* Character bubbles */
+.hero-chars {
+  display:flex; gap:1.2rem; flex-wrap:wrap;
+  justify-content:center; margin-bottom:2.5rem;
+}
+.char-wrap { display:flex; flex-direction:column; align-items:center; gap:.5rem; }
+.char-bubble {
+  width:90px; height:90px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:2.4rem;
+  border:3px solid rgba(255,255,255,.2);
+  cursor:pointer;
+  animation:float var(--fd,3s) var(--fdelay,0s) ease-in-out infinite;
+  transition:transform .2s;
+  position:relative; overflow:hidden;
+}
+.char-bubble::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.12),transparent);
+  z-index:1; pointer-events:none;
+}
+.char-bubble img {
+  width:100%; height:100%;
+  object-fit:cover; object-position:center 18%;
+  border-radius:50%;
+  display:block;
+}
+.char-bubble:hover { transform:scale(1.15) rotate(5deg) !important; }
+.char-label { font-size:.82rem; font-weight:800; color:rgba(255,255,255,.75); }
+
+.cb-ricky  { background:radial-gradient(circle at 40% 35%, #d4a870, #8B5A2B); }
+.cb-jp     { background:radial-gradient(circle at 40% 35%, #6aabdd, #1f4f80); }
+.cb-lila   { background:radial-gradient(circle at 40% 35%, #b8d8f0, #6890c0); }
+.cb-rosie  { background:radial-gradient(circle at 40% 35%, #f0a8d8, #a04880); }
+
+@keyframes float {
+  0%,100% { transform:translateY(0); }
+  50%      { transform:translateY(-14px); }
+}
+
+/* CTA buttons */
+.hero-btns { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
+.btn {
+  padding:.9rem 2rem; border-radius:50px;
+  font-family:'Nunito',sans-serif; font-size:1rem; font-weight:800;
+  cursor:pointer; border:none; text-decoration:none;
+  display:inline-flex; align-items:center; gap:.5rem;
+  transition:transform .25s, box-shadow .25s;
+}
+.btn:hover { transform:translateY(-3px); }
+.btn-gold {
+  background:linear-gradient(135deg,#F5E042,#F0A020);
+  color:#12082A;
+}
+.btn-gold:hover { box-shadow:0 10px 30px rgba(245,224,66,.45); }
+.btn-ghost {
+  background:rgba(255,255,255,.08);
+  color:#fff; border:2px solid rgba(255,255,255,.25);
+  backdrop-filter:blur(8px);
+}
+.btn-ghost:hover { background:rgba(255,255,255,.15); }
+
+.scroll-cue {
+  position:absolute; bottom:1.5rem;
+  color:rgba(255,255,255,.35); font-size:.8rem;
+  animation:bob 2s ease-in-out infinite;
+}
+@keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+
+/* ─── SECTIONS shared ─────────────────────────────────── */
+section { padding:5rem 1.5rem; }
+.container { max-width:1100px; margin:0 auto; }
+.sec-title {
+  text-align:center; font-size:clamp(1.8rem,5vw,2.8rem);
+  font-weight:900; margin-bottom:.4rem;
+}
+.sec-sub {
+  text-align:center; color:rgba(255,255,255,.55);
+  margin-bottom:3rem; font-size:1rem;
+}
+
+/* ─── SOBRE (About strip) ─────────────────────────────── */
+.about-section {
+  background:linear-gradient(135deg,rgba(26,51,32,.9),rgba(18,8,42,.9));
+  border-top:1px solid rgba(255,255,255,.05);
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.about-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center;
+}
+@media(max-width:700px){ .about-grid { grid-template-columns:1fr; } }
+.about-text h2 { font-size:2rem; font-weight:900; margin-bottom:1rem; color:var(--gold); }
+.about-text p  { line-height:1.8; color:rgba(255,255,255,.8); margin-bottom:1rem; }
+.about-stats {
+  display:grid; grid-template-columns:1fr 1fr; gap:1rem;
+}
+.stat-box {
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:16px; padding:1.2rem; text-align:center;
+}
+.stat-num { font-size:2rem; font-weight:900; color:var(--gold); }
+.stat-lbl { font-size:.8rem; opacity:.6; margin-top:.2rem; }
+
+/* ─── CHARACTERS ──────────────────────────────────────── */
+.chars-section { background:#0D1A10; }
+.chars-grid {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:1.5rem;
+}
+.char-card {
+  border-radius:24px; padding:2rem; text-align:center;
+  transition:transform .3s, box-shadow .3s;
+  position:relative; overflow:hidden;
+}
+.char-card:hover {
+  transform:translateY(-8px);
+  box-shadow:0 20px 40px rgba(0,0,0,.4);
+}
+
+.char-card.ricky { background:linear-gradient(145deg,rgba(196,147,90,.18),rgba(107,124,58,.12)); border:1px solid rgba(196,147,90,.35); }
+.char-card.jp    { background:linear-gradient(145deg,rgba(59,111,160,.18),rgba(91,143,192,.1));  border:1px solid rgba(59,111,160,.35); }
+.char-card.lila  { background:linear-gradient(145deg,rgba(168,200,232,.15),rgba(244,160,176,.1)); border:1px solid rgba(168,200,232,.35); }
+.char-card.rosie { background:linear-gradient(145deg,rgba(216,120,176,.18),rgba(155,114,207,.15)); border:1px solid rgba(216,120,176,.35); }
+
+.char-card-avatar {
+  width:110px; height:110px; border-radius:50%;
+  margin:0 auto 1.2rem;
+  display:flex; align-items:center; justify-content:center;
+  font-size:3rem;
+  border:3px solid rgba(255,255,255,.2);
+  position:relative;
+  overflow:hidden;
+}
+.char-card-avatar img {
+  width:100%; height:100%;
+  object-fit:cover; object-position:center 15%;
+  border-radius:50%;
+  display:block;
+}
+.ricky .char-card-avatar { background:radial-gradient(circle at 40% 35%,#d4a870,#8B5A2B); }
+.jp    .char-card-avatar { background:radial-gradient(circle at 40% 35%,#6aabdd,#1f4f80); }
+.lila  .char-card-avatar { background:radial-gradient(circle at 40% 35%,#b8d8f0,#6890c0); }
+.rosie .char-card-avatar { background:radial-gradient(circle at 40% 35%,#f0a8d8,#a04880); }
+
+.char-card-name { font-size:1.6rem; font-weight:900; margin-bottom:.2rem; }
+.ricky .char-card-name { color:#d4a870; }
+.jp    .char-card-name { color:#7ab0d8; }
+.lila  .char-card-name { color:#b8d8f0; }
+.rosie .char-card-name { color:#f0a8d8; }
+
+.char-card-role {
+  font-size:.78rem; font-weight:700; text-transform:uppercase;
+  letter-spacing:1.5px; opacity:.55; margin-bottom:.4rem;
+}
+.char-card-place { font-size:.82rem; opacity:.5; margin-bottom:.9rem; }
+.char-card-desc  { font-size:.92rem; line-height:1.65; opacity:.82; }
+
+.char-tag {
+  display:inline-block; margin-top:1rem;
+  padding:.3rem 1rem; border-radius:50px;
+  font-size:.78rem; font-weight:800;
+}
+.ricky .char-tag { background:rgba(196,147,90,.25); color:#d4a870; }
+.jp    .char-tag { background:rgba(59,111,160,.25);  color:#7ab0d8; }
+.lila  .char-tag { background:rgba(168,200,232,.25); color:#b8d8f0; }
+.rosie .char-tag { background:rgba(216,120,176,.25); color:#f0a8d8; }
+
+/* ─── VIDEOS ──────────────────────────────────────────── */
+.videos-section { background:#0D1F0D; }
+.videos-grid {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+  gap:1.5rem;
+}
+.video-card {
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px; overflow:hidden;
+  transition:transform .3s, border-color .3s;
+  cursor:pointer;
+}
+.video-card:hover { transform:translateY(-5px); border-color:rgba(245,224,66,.3); }
+.video-thumb {
+  width:100%; aspect-ratio:16/9;
+  display:flex; align-items:center; justify-content:center;
+  font-size:3rem; position:relative;
+}
+.video-thumb.ep1 { background:linear-gradient(135deg,#1a3320,#1a0d2e); }
+.video-thumb.ep2 { background:linear-gradient(135deg,#0d1f2e,#1a2e3a); }
+.video-thumb.ep3 { background:linear-gradient(135deg,#1a1a0d,#2e1a0d); }
+.play-circle {
+  position:absolute;
+  width:54px; height:54px;
+  background:rgba(245,224,66,.9); border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  color:#12082A; font-size:1.3rem; font-weight:900;
+  transition:transform .2s;
+}
+.video-card:hover .play-circle { transform:scale(1.1); }
+.video-info { padding:1rem 1.2rem; }
+.video-title { font-weight:800; font-size:.95rem; margin-bottom:.3rem; }
+.video-meta  { font-size:.78rem; opacity:.45; }
+
+.videos-cta { text-align:center; margin-top:2.5rem; }
+
+/* ─── SOCIAL ──────────────────────────────────────────── */
+.social-section {
+  background:linear-gradient(180deg,#0D1F0D,#12082A);
+  text-align:center;
+}
+.social-row {
+  display:flex; gap:1.2rem; flex-wrap:wrap; justify-content:center;
+  margin-top:2.5rem;
+}
+.social-pill {
+  display:flex; align-items:center; gap:.8rem;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:50px;
+  padding:.9rem 1.8rem;
+  text-decoration:none; color:#fff;
+  font-weight:800; font-size:.95rem;
+  transition:all .25s;
+}
+.social-pill:hover {
+  transform:translateY(-3px);
+  background:rgba(255,255,255,.12);
+  border-color:rgba(245,224,66,.4);
+}
+.social-pill span { font-size:1.4rem; }
+
+/* ─── NEWSLETTER ──────────────────────────────────────── */
+.news-section { background:#12082A; }
+.news-box {
+  background:linear-gradient(135deg,rgba(245,224,66,.06),rgba(216,120,176,.06));
+  border:1px solid rgba(245,224,66,.2);
+  border-radius:28px; padding:3.5rem 2rem;
+  max-width:580px; margin:0 auto; text-align:center;
+}
+.news-icon  { font-size:3rem; margin-bottom:1rem; display:block; }
+.news-title { font-size:1.9rem; font-weight:900; color:var(--gold); margin-bottom:.5rem; }
+.news-desc  { opacity:.65; margin-bottom:1.8rem; line-height:1.7; }
+.news-form  { display:flex; gap:.75rem; flex-wrap:wrap; justify-content:center; }
+.news-input {
+  flex:1; min-width:200px;
+  padding:.85rem 1.4rem; border-radius:50px;
+  background:rgba(255,255,255,.06);
+  border:2px solid rgba(245,224,66,.25);
+  color:#fff; font-family:'Nunito',sans-serif; font-size:1rem;
+  outline:none; transition:border-color .2s;
+}
+.news-input::placeholder { color:rgba(255,255,255,.35); }
+.news-input:focus { border-color:rgba(245,224,66,.6); }
+.news-fine { font-size:.75rem; opacity:.4; margin-top:1rem; }
+
+/* ─── FOOTER ──────────────────────────────────────────── */
+footer {
+  background:#060d06;
+  padding:2.5rem 1.5rem;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+.footer-inner {
+  max-width:1100px; margin:0 auto;
+  display:flex; flex-direction:column; align-items:center; gap:.6rem;
+}
+.footer-logo { font-size:1.6rem; font-weight:900; color:var(--gold); letter-spacing:4px; }
+.footer-domain { font-size:.85rem; color:rgba(255,255,255,.35); }
+.footer-chars  { display:flex; gap:.6rem; justify-content:center; margin:.5rem 0; }
+.footer-chars img {
+  width:52px; height:52px; border-radius:50%;
+  object-fit:cover; object-position:center 18%;
+  border:2px solid rgba(255,255,255,.15);
+  transition:transform .2s;
+}
+.footer-chars img:hover { transform:scale(1.15); }
+.footer-copy   { font-size:.75rem; color:rgba(255,255,255,.25); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo"><img src="img/logo.png" alt="WOLFLAND" style="height:44px;width:auto;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))"></a>
+  <ul class="nav-links">
+    <li><a href="#personagens">Lobinhos</a></li>
+    <li><a href="#videos">Episódios</a></li>
+    <li><a href="#siga">Redes</a></li>
+  </ul>
+  <a href="https://youtube.com/@wolfland" class="nav-cta">▶ Assistir</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div id="stars"></div>
+
+  <div class="hero-badge">✦ Novo canal de animação infantil ✦</div>
+  <img src="img/logo.png" alt="WOLFLAND - Bosque dos Lobinhos"
+       style="width:min(420px,85vw);height:auto;filter:drop-shadow(0 8px 32px rgba(0,0,0,.6));margin-bottom:.5rem">
+
+  <div class="hero-chars">
+    <div class="char-wrap">
+      <div class="char-bubble cb-ricky" style="--fd:3.2s;--fdelay:0s"><img src="img/ricky.jpeg" alt="Ricky"></div>
+      <span class="char-label">Ricky</span>
+    </div>
+    <div class="char-wrap">
+      <div class="char-bubble cb-jp" style="--fd:2.8s;--fdelay:.4s"><img src="img/jp.jpeg" alt="JP"></div>
+      <span class="char-label">JP</span>
+    </div>
+    <div class="char-wrap">
+      <div class="char-bubble cb-lila" style="--fd:3.5s;--fdelay:.8s"><img src="img/lila.jpeg" alt="Lila"></div>
+      <span class="char-label">Lila</span>
+    </div>
+    <div class="char-wrap">
+      <div class="char-bubble cb-rosie" style="--fd:3s;--fdelay:1.2s"><img src="img/rosie.jpeg" alt="Rosie"></div>
+      <span class="char-label">Rosie</span>
+    </div>
+  </div>
+
+  <p class="hero-desc">
+    Um lugar mágico cheio de aventura, amizade e descobertas.<br>
+    Vem explorar o bosque com a gente! 🌟
+  </p>
+
+  <div class="hero-btns">
+    <a href="https://youtube.com/@wolfland" class="btn btn-gold">▶ Assistir no YouTube</a>
+    <a href="#personagens" class="btn btn-ghost">🐾 Conheça os Lobinhos</a>
+  </div>
+
+  <div class="scroll-cue">▼ role para descobrir ▼</div>
+
+  <!-- Trees -->
+  <svg class="trees-svg" viewBox="0 0 1440 160" preserveAspectRatio="none">
+    <path d="M0,160 L0,80 L30,40 L60,80 L60,55 L100,5 L140,55 L140,75
+             L180,35 L220,75 L260,45 L300,85 L340,50 L380,90 L420,30
+             L460,70 L500,15 L540,55 L580,5 L620,45 L660,20 L700,60
+             L740,10 L780,50 L820,0 L860,40 L900,5 L940,45 L980,15
+             L1020,60 L1060,25 L1100,70 L1140,35 L1180,80 L1220,45
+             L1260,75 L1300,40 L1340,80 L1380,50 L1440,85 L1440,160 Z"
+          fill="#060d06"/>
+  </svg>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>O que é o Bosque?</h2>
+        <p>O <strong>Bosque dos Lobinhos</strong> é um mundo de animação infantil onde quatro filhotes de lobo vivem aventuras cheias de amizade, curiosidade e descoberta — cada um no seu lar especial dentro do bosque mágico.</p>
+        <p>Criado para crianças de 3 a 7 anos, o WOLFLAND ensina valores como coragem, gentileza, alegria e imaginação de forma lúdica e encantadora.</p>
+        <a href="#videos" class="btn btn-gold" style="margin-top:1rem">🎬 Ver Episódios</a>
+      </div>
+      <div class="about-stats">
+        <div class="stat-box"><div class="stat-num">4</div><div class="stat-lbl">Personagens únicos</div></div>
+        <div class="stat-box"><div class="stat-num">3</div><div class="stat-lbl">Idiomas (PT/EN/ES)</div></div>
+        <div class="stat-box"><div class="stat-num">🌲</div><div class="stat-lbl">Floresta mágica</div></div>
+        <div class="stat-box"><div class="stat-num">♾️</div><div class="stat-lbl">Aventuras novas</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHARACTERS -->
+<section class="chars-section" id="personagens">
+  <div class="container">
+    <div class="sec-title">🐾 Os Quatro Lobinhos</div>
+    <div class="sec-sub">Cada um tem um lar, um talento e uma história para te contar</div>
+    <div class="chars-grid">
+
+      <div class="char-card ricky">
+        <div class="char-card-avatar"><img src="img/ricky.jpeg" alt="Ricky"></div>
+        <div class="char-card-name">Ricky</div>
+        <div class="char-card-role">O Corajoso</div>
+        <div class="char-card-place">📍 Bosque dos Pinheiros</div>
+        <div class="char-card-desc">Com seu bandana camuflado e olhos azuis cheios de determinação, Ricky nunca fica parado. O primeiro a explorar qualquer trilha desconhecida!</div>
+        <span class="char-tag">🌲 Aventureiro</span>
+      </div>
+
+      <div class="char-card jp">
+        <div class="char-card-avatar"><img src="img/jp.jpeg" alt="JP"></div>
+        <div class="char-card-name">JP</div>
+        <div class="char-card-role">O Animado</div>
+        <div class="char-card-place">📍 Pico Nevado</div>
+        <div class="char-card-desc">Com seu gorrinho azul de pompom e cachecol listrado, JP vive no topo da montanha nevada. O mais animado da turma — o frio nunca o intimida!</div>
+        <span class="char-tag">❄️ Brincalhão</span>
+      </div>
+
+      <div class="char-card lila">
+        <div class="char-card-avatar"><img src="img/lila.jpeg" alt="Lila"></div>
+        <div class="char-card-name">Lila</div>
+        <div class="char-card-role">A Gentil</div>
+        <div class="char-card-place">📍 Jardim das Flores</div>
+        <div class="char-card-desc">Com uma florzinha rosa na orelha e olhos verdes cheios de carinho, Lila cuida do Jardim das Flores. Para ela, cada flor tem uma história.</div>
+        <span class="char-tag">🦋 Cuidadora</span>
+      </div>
+
+      <div class="char-card rosie">
+        <div class="char-card-avatar"><img src="img/rosie.jpeg" alt="Rosie"></div>
+        <div class="char-card-name">Rosie</div>
+        <div class="char-card-role">A Mágica</div>
+        <div class="char-card-place">📍 Bosque das Estrelas</div>
+        <div class="char-card-desc">Com sua tiara de estrela dourada e olhos lilás, Rosie guarda os segredos mais brilhantes do bosque. Onde ela passa, a magia acontece!</div>
+        <span class="char-tag">⭐ Encantadora</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section class="videos-section" id="videos">
+  <div class="container">
+    <div class="sec-title">🎬 Episódios</div>
+    <div class="sec-sub">Aventuras novas toda semana no canal</div>
+    <div class="videos-grid">
+
+      <div class="video-card">
+        <div class="video-thumb ep1">
+          🌲
+          <div class="play-circle">▶</div>
+        </div>
+        <div class="video-info">
+          <div class="video-title">Ep. 01 — A Grande Aventura do Bosque</div>
+          <div class="video-meta">🐾 WOLFLAND · Em breve</div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb ep2">
+          ❄️
+          <div class="play-circle">▶</div>
+        </div>
+        <div class="video-info">
+          <div class="video-title">Ep. 02 — JP e a Tempestade de Neve</div>
+          <div class="video-meta">🐾 WOLFLAND · Em breve</div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb ep3">
+          🌸
+          <div class="play-circle">▶</div>
+        </div>
+        <div class="video-info">
+          <div class="video-title">Ep. 03 — O Jardim Secreto da Lila</div>
+          <div class="video-meta">🐾 WOLFLAND · Em breve</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="videos-cta">
+      <a href="https://youtube.com/@wolfland" class="btn btn-gold" style="margin-top:1rem">Ver todos no YouTube ▶</a>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section class="social-section" id="siga">
+  <div class="container">
+    <div class="sec-title">🌟 Siga o Bosque</div>
+    <div class="sec-sub">Acompanhe as aventuras e bastidores nas redes</div>
+    <div class="social-row">
+      <a href="#" class="social-pill"><span>▶️</span> YouTube</a>
+      <a href="#" class="social-pill"><span>📸</span> Instagram</a>
+      <a href="#" class="social-pill"><span>🎵</span> TikTok</a>
+      <a href="#" class="social-pill"><span>🎧</span> Spotify</a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="news-section">
+  <div class="container">
+    <div class="news-box">
+      <span class="news-icon">📬</span>
+      <div class="news-title">Novidades do Bosque</div>
+      <p class="news-desc">Receba os primeiros avisos de episódios, músicas e surpresas direto no e-mail dos pais!</p>
+      <div class="news-form">
+        <input type="email" class="news-input" placeholder="seu@email.com">
+        <button class="btn btn-gold" onclick="subscribeNews()">Entrar no Bosque 🌲</button>
+      </div>
+      <div class="news-fine">Sem spam. Só aventuras. Cancele quando quiser.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <img src="img/logo.png" alt="WOLFLAND" style="height:80px;width:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))">
+    <div class="footer-chars">
+      <img src="img/ricky.jpeg" alt="Ricky">
+      <img src="img/jp.jpeg" alt="JP">
+      <img src="img/lila.jpeg" alt="Lila">
+      <img src="img/rosie.jpeg" alt="Rosie">
+    </div>
+    <div class="footer-domain">bosquedoslobinhos.com.br</div>
+    <div class="footer-copy">© 2026 Bosque dos Lobinhos · Feito com 💛 para crianças curiosas</div>
+  </div>
+</footer>
+
+<script>
+// ── Stars ──────────────────────────────────────────────────
+const starContainer = document.getElementById('stars');
+for (let i = 0; i < 90; i++) {
+  const s = document.createElement('div');
+  s.className = 's';
+  const sz = Math.random() * 2.5 + 0.5;
+  s.style.cssText = `
+    width:${sz}px; height:${sz}px;
+    top:${Math.random()*75}%; left:${Math.random()*100}%;
+    --d:${2+Math.random()*3}s; --delay:${Math.random()*4}s;
+  `;
+  starContainer.appendChild(s);
+}
+
+// ── Fireflies ──────────────────────────────────────────────
+for (let i = 0; i < 18; i++) {
+  const ff = document.createElement('div');
+  ff.className = 'ff';
+  const r = () => (Math.random()-0.5)*200;
+  ff.style.cssText = `
+    top:${30+Math.random()*50}%; left:${Math.random()*100}%;
+    --d:${7+Math.random()*8}s; --delay:${Math.random()*6}s;
+    --tx1:${r()}px; --ty1:${r()}px;
+    --tx2:${r()}px; --ty2:${r()}px;
+    --tx3:${r()}px; --ty3:${r()}px;
+    --tx4:${r()}px; --ty4:${r()}px;
+  `;
+  starContainer.appendChild(ff);
+}
+
+// ── Newsletter ─────────────────────────────────────────────
+function subscribeNews() {
+  const input = document.querySelector('.news-input');
+  if (!input.value || !input.value.includes('@')) {
+    input.style.borderColor = '#ff6b6b';
+    input.focus();
+    return;
+  }
+  const btn = document.querySelector('.news-form .btn');
+  btn.textContent = '✓ Bem-vindo ao Bosque!';
+  btn.style.background = '#4CAF50';
+  input.disabled = true;
+}
+
+// ── Smooth scroll for all # links ─────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior:'smooth' }); }
+  });
+});
+
+// ── Nav hide/show on scroll ────────────────────────────────
+let lastY = 0;
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  nav.style.transform = y > lastY && y > 100 ? 'translateY(-100%)' : 'translateY(0)';
+  nav.style.transition = 'transform .3s';
+  lastY = y;
+});
+</script>
+</body>
+</html>
