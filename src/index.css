@@ -777,6 +777,112 @@ ul { list-style: none; }
 .cookie-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245,197,66,.35); }
 
 /* ============================================================
+   PRIVACY PAGE
+   ============================================================ */
+.privacy-page {
+  min-height: 100vh;
+  background: var(--bg-deep);
+  position: relative;
+  padding: 0 0 4rem;
+}
+.privacy-bg {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 20%, #1a0e3a 0%, #0a0917 60%);
+  z-index: 0;
+  pointer-events: none;
+}
+.privacy-container {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 7rem 2rem 2rem;
+}
+.privacy-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(245,197,66,.2);
+}
+.privacy-logo {
+  width: 160px;
+  display: block;
+  margin: 0 auto 1.5rem;
+}
+.privacy-title {
+  font-family: 'Bigover', var(--font-display);
+  font-size: 2.4rem;
+  color: var(--gold);
+  margin: 0 0 .5rem;
+}
+.privacy-updated {
+  font-family: var(--font);
+  font-size: .85rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+.privacy-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.privacy-section {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(245,197,66,.08);
+  border-radius: 12px;
+  padding: 1.5rem 1.75rem;
+}
+.privacy-section-title {
+  font-family: 'Baloo2', var(--font-display);
+  font-size: 1.05rem;
+  color: var(--gold);
+  margin: 0 0 .75rem;
+  font-weight: 800;
+}
+.privacy-section-text {
+  font-family: var(--font);
+  font-size: .95rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin: 0;
+}
+.privacy-footer {
+  margin-top: 3rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.privacy-back {
+  font-family: var(--font);
+  font-size: .95rem;
+  font-weight: 800;
+  color: var(--gold);
+  text-decoration: none;
+  padding: .65rem 2rem;
+  border: 2px solid rgba(245,197,66,.4);
+  border-radius: 50px;
+  transition: background .2s, border-color .2s;
+}
+.privacy-back:hover {
+  background: rgba(245,197,66,.1);
+  border-color: var(--gold);
+}
+.privacy-brand {
+  font-family: var(--font);
+  font-size: .75rem;
+  color: rgba(168,159,200,.5);
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .privacy-title { font-size: 1.8rem; }
+  .privacy-section { padding: 1.25rem 1.25rem; }
+}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 768px) {
