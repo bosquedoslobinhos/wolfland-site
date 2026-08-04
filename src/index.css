@@ -776,6 +776,18 @@ ul { list-style: none; }
 }
 .cookie-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245,197,66,.35); }
 
+.footer-privacy {
+  font-family: var(--font);
+  font-size: .8rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  opacity: .7;
+  transition: opacity .2s, color .2s;
+  margin-top: .25rem;
+  display: inline-block;
+}
+.footer-privacy:hover { color: var(--gold); opacity: 1; }
+
 /* ============================================================
    PRIVACY PAGE
    ============================================================ */
