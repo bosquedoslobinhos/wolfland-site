@@ -6,18 +6,21 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export default function Newsletter() {
   const [email, setEmail] = useState('')
-  const [status, setStatus] = useState('idle') // idle | loading | success | error | duplicate
+  const [guardian, setGuardian] = useState(false)
+  const [status, setStatus] = useState('idle') // idle | loading | success | error | duplicate | noguardian
   const { t, lang } = useLang()
   const n = t.newsletter
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!EMAIL_RE.test(email)) { setStatus('error'); return }
+    if (!guardian) { setStatus('noguardian'); return }
     setStatus('loading')
     const result = await subscribeNewsletter(email, lang)
     if (result.ok) {
       setStatus('success')
       setEmail('')
+      setGuardian(false)
       setTimeout(() => setStatus('idle'), 6000)
     } else if (result.duplicate) {
       setStatus('duplicate')
@@ -51,18 +54,31 @@ export default function Newsletter() {
               className={`newsletter-input${status === 'error' ? ' newsletter-input--error' : ''}`}
               placeholder={n.placeholder}
               value={email}
-              onChange={(e) => { setEmail(e.target.value); setStatus('idle') }}
+              onChange={(e) => { setEmail(e.target.value); if (status === 'error') setStatus('idle') }}
               aria-label={n.placeholder}
               disabled={status === 'loading'}
             />
             <button type="submit" className="btn btn-primary newsletter-btn" disabled={status === 'loading'}>
               {status === 'loading' ? '...' : n.cta}
             </button>
+
+            {/* ECA Digital — consentimento do responsável legal (Lei 15.211/2025) */}
+            <label className={`newsletter-guardian-label${status === 'noguardian' ? ' newsletter-guardian-label--error' : ''}`}>
+              <input
+                type="checkbox"
+                className="newsletter-guardian-check"
+                checked={guardian}
+                onChange={(e) => { setGuardian(e.target.checked); if (status === 'noguardian') setStatus('idle') }}
+                disabled={status === 'loading'}
+              />
+              <span className="newsletter-guardian-text">{n.guardian}</span>
+            </label>
           </form>
         )}
 
-        {status === 'error' && <p className="newsletter-error">{n.error}</p>}
-        {status === 'duplicate' && <p className="newsletter-error">{n.duplicate ?? 'Esse e-mail já está na lista! 🐾'}</p>}
+        {status === 'error'      && <p className="newsletter-error">{n.error}</p>}
+        {status === 'duplicate'  && <p className="newsletter-error">{n.duplicate}</p>}
+        {status === 'noguardian' && <p className="newsletter-error">{n.guardianRequired}</p>}
 
         <div className="newsletter-chars">
           {['ricky', 'jp', 'lila', 'rosie'].map((c) => (

@@ -35,11 +35,15 @@ const content = {
         text: 'Guardamos seu e-mail enquanto você for assinante da nossa lista. Ao solicitar a remoção, excluímos seus dados em até 15 dias úteis.',
       },
       {
-        heading: '8. Alterações nesta política',
+        heading: '8. ECA Digital (Lei 15.211/2025)',
+        text: 'O WOLFLAND é um projeto de conteúdo infantil e segue as diretrizes do Estatuto Digital da Criança e do Adolescente (Lei nº 15.211/2025). Por isso: (a) não coletamos dados pessoais diretamente de crianças ou adolescentes — o formulário de newsletter exige confirmação de responsável legal; (b) não utilizamos técnicas de perfilamento ou publicidade direcionada a menores; (c) os vídeos são incorporados via youtube-nocookie.com para maior proteção de privacidade; (d) não compartilhamos dados com terceiros para fins comerciais.',
+      },
+      {
+        heading: '9. Alterações nesta política',
         text: 'Esta política pode ser atualizada periodicamente. Quando isso ocorrer, a data de "última atualização" no topo desta página será revisada. Recomendamos verificar esta página de tempos em tempos.',
       },
       {
-        heading: '9. Contato',
+        heading: '10. Contato',
         text: 'bosquedoslobinhos@gmail.com',
       },
     ],
@@ -78,11 +82,15 @@ const content = {
         text: 'We keep your email for as long as you remain a subscriber. Upon removal request, we delete your data within 15 business days.',
       },
       {
-        heading: '8. Changes to this policy',
+        heading: '8. ECA Digital (Brazilian Children\'s Digital Act)',
+        text: 'WOLFLAND is a children\'s content project and follows the Brazilian Digital Children and Adolescents Act (Lei 15.211/2025). Therefore: (a) we do not collect personal data directly from children — the newsletter form requires legal guardian confirmation; (b) we do not use profiling or targeted advertising directed at minors; (c) videos are embedded via youtube-nocookie.com for enhanced privacy; (d) we do not share data with third parties for commercial purposes.',
+      },
+      {
+        heading: '9. Changes to this policy',
         text: 'This policy may be updated periodically. When that happens, the "last updated" date at the top of this page will be revised. We recommend checking this page from time to time.',
       },
       {
-        heading: '9. Contact',
+        heading: '10. Contact',
         text: 'bosquedoslobinhos@gmail.com',
       },
     ],
@@ -121,11 +129,15 @@ const content = {
         text: 'Guardamos tu correo electrónico mientras seas suscriptor. Al solicitar la eliminación, borramos tus datos en un plazo de 15 días hábiles.',
       },
       {
-        heading: '8. Cambios en esta política',
+        heading: '8. ECA Digital (Ley Digital de la Infancia de Brasil)',
+        text: 'WOLFLAND es un proyecto de contenido infantil y sigue las directrices de la Ley Digital del Niño y del Adolescente de Brasil (Lei 15.211/2025). Por ello: (a) no recopilamos datos personales directamente de niños — el formulario de newsletter requiere confirmación del tutor legal; (b) no utilizamos técnicas de creación de perfiles ni publicidad dirigida a menores; (c) los videos se integran mediante youtube-nocookie.com para mayor protección de la privacidad; (d) no compartimos datos con terceros con fines comerciales.',
+      },
+      {
+        heading: '9. Cambios en esta política',
         text: 'Esta política puede actualizarse periódicamente. Cuando eso ocurra, se revisará la fecha de "última actualización" en la parte superior de esta página.',
       },
       {
-        heading: '9. Contacto',
+        heading: '10. Contacto',
         text: 'bosquedoslobinhos@gmail.com',
       },
     ],

@@ -45,7 +45,7 @@ export default function Videos() {
               <div className="video-thumb">
                 {ep.youtube_id ? (
                   <iframe
-                    src={`https://www.youtube.com/embed/${ep.youtube_id}`}
+                    src={`https://www.youtube-nocookie.com/embed/${ep.youtube_id}`}
                     title={titleFor(ep)}
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

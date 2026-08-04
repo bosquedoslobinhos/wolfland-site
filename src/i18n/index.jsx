@@ -73,6 +73,9 @@ export const translations = {
       cta: 'Entrar na lista 🐾',
       success: 'Uau! Você está na lista! Até logo no bosque!',
       error: 'Hmm, esse e-mail parece inválido. Tente de novo!',
+      duplicate: 'Esse e-mail já está na lista! 🐾',
+      guardian: 'Sou pai, mãe ou responsável legal pela criança e autorizo o uso do meu e-mail para receber novidades do WOLFLAND.',
+      guardianRequired: 'É necessário confirmar que você é responsável legal para se inscrever.',
     },
     footer: {
       rights: 'Todos os direitos reservados.',
@@ -156,6 +159,9 @@ export const translations = {
       cta: 'Join the list 🐾',
       success: "Wow! You're on the list! See you in the forest!",
       error: "Hmm, that email doesn't look right. Try again!",
+      duplicate: "This email is already on the list! 🐾",
+      guardian: "I am the parent or legal guardian of the child and I authorize the use of my email to receive WOLFLAND updates.",
+      guardianRequired: 'You must confirm you are a legal guardian to subscribe.',
     },
     footer: {
       rights: 'All rights reserved.',
@@ -239,6 +245,9 @@ export const translations = {
       cta: 'Unirse a la lista 🐾',
       success: '¡Genial! ¡Estás en la lista! ¡Hasta pronto en el bosque!',
       error: 'Hmm, ese correo no parece válido. ¡Intenta de nuevo!',
+      duplicate: '¡Este correo ya está en la lista! 🐾',
+      guardian: 'Soy padre, madre o tutor legal del niño y autorizo el uso de mi correo para recibir novedades de WOLFLAND.',
+      guardianRequired: 'Debes confirmar que eres tutor legal para suscribirte.',
     },
     footer: {
       rights: 'Todos los derechos reservados.',
