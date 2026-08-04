@@ -1,21 +1,29 @@
 import { useState } from 'react'
 import { useLang } from '../i18n'
+import { subscribeNewsletter } from '../lib/supabase'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export default function Newsletter() {
   const [email, setEmail] = useState('')
-  const [status, setStatus] = useState('idle') // idle | success | error
-  const { t } = useLang()
+  const [status, setStatus] = useState('idle') // idle | loading | success | error | duplicate
+  const { t, lang } = useLang()
   const n = t.newsletter
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (!EMAIL_RE.test(email)) { setStatus('error'); return }
-    // TODO: integrar com Mailchimp / ConvertKit / Brevo
-    setStatus('success')
-    setEmail('')
-    setTimeout(() => setStatus('idle'), 6000)
+    setStatus('loading')
+    const result = await subscribeNewsletter(email, lang)
+    if (result.ok) {
+      setStatus('success')
+      setEmail('')
+      setTimeout(() => setStatus('idle'), 6000)
+    } else if (result.duplicate) {
+      setStatus('duplicate')
+    } else {
+      setStatus('error')
+    }
   }
 
   return (
@@ -45,16 +53,16 @@ export default function Newsletter() {
               value={email}
               onChange={(e) => { setEmail(e.target.value); setStatus('idle') }}
               aria-label={n.placeholder}
+              disabled={status === 'loading'}
             />
-            <button type="submit" className="btn btn-primary newsletter-btn">
-              {n.cta}
+            <button type="submit" className="btn btn-primary newsletter-btn" disabled={status === 'loading'}>
+              {status === 'loading' ? '...' : n.cta}
             </button>
           </form>
         )}
 
-        {status === 'error' && (
-          <p className="newsletter-error">{n.error}</p>
-        )}
+        {status === 'error' && <p className="newsletter-error">{n.error}</p>}
+        {status === 'duplicate' && <p className="newsletter-error">{n.duplicate ?? 'Esse e-mail já está na lista! 🐾'}</p>}
 
         <div className="newsletter-chars">
           {['ricky', 'jp', 'lila', 'rosie'].map((c) => (
