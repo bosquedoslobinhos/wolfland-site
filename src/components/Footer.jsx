@@ -27,6 +27,7 @@ export default function Footer() {
         <p className="footer-copy">
           © {year} WOLFLAND — Bosque dos Lobinhos. {t.footer.rights}
         </p>
+        <a href="/privacidade" className="footer-privacy">{t.footer.privacy}</a>
       </div>
     </footer>
   )

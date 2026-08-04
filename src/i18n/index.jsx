@@ -76,6 +76,7 @@ export const translations = {
     },
     footer: {
       rights: 'Todos os direitos reservados.',
+      privacy: 'Política de Privacidade',
     },
     cookies: {
       text: 'Usamos cookies para melhorar a experiência deste site. Ao continuar, você concorda com nossa',
@@ -158,6 +159,7 @@ export const translations = {
     },
     footer: {
       rights: 'All rights reserved.',
+      privacy: 'Privacy Policy',
     },
     cookies: {
       text: 'We use cookies to improve your experience on this site. By continuing, you agree to our',
@@ -240,6 +242,7 @@ export const translations = {
     },
     footer: {
       rights: 'Todos los derechos reservados.',
+      privacy: 'Política de Privacidad',
     },
     cookies: {
       text: 'Usamos cookies para mejorar tu experiencia en este sitio. Al continuar, aceptas nuestra',
